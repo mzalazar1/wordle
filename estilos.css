@@ -1,7 +1,6 @@
 header {
     background-color: #6969B3;
     height: auto;
-  /*  max-width: 60%; */
     margin: 0 auto;
 }
 fieldset {
@@ -10,6 +9,7 @@ fieldset {
     margin-top: 5px;
     padding-block-start: 0;
     padding-block-end: 0;
+    width: 350px;
 }
 button {
     width: 100%;
@@ -26,12 +26,10 @@ th {
     width: 15%;
 }
 
-
 footer {
     background-color: #6969B3;
     display: flex;
     justify-content: space-between;
-  /*  max-width: 60%; */
     height: auto;
     margin: 10px auto;
 }
@@ -52,8 +50,8 @@ footer {
     margin: 0 auto;
 }
 .tablero input {
-    height: 48px;
-    width: 48px;
+    height: 40px;
+    width: 55px;
     margin: 4px 4px;
     padding: 0;
 }
@@ -66,11 +64,9 @@ footer {
 .rowTec {
     display: flex;
 }
-.oculto {
+.hidden {
     display: none;
 }
-
-/* ----- Estilos -----*/
 
 h1 {
     text-align: center;
@@ -79,15 +75,12 @@ h1 {
 body {
     background-color: #737171;
 }
-/*fieldset {
-    border: none;
-}*/
+
 input {
     text-align: center;
     font-weight: 500;
     font-size: 20px;
     color: #3D3B3D;
-   /* border-radius: 10px; */
     border: 1px solid;
     border-color: #8F898D;
 }
@@ -97,7 +90,6 @@ tr, td, th {
 }
 button {
     border: 1px solid #8F898D;
-  /*  border-radius: 15px; */
     font-size: 15px;
     font-weight: 500;
 }
@@ -136,4 +128,14 @@ footer button {
 }
 .bg-gray{
     background-color: #808080;
+}
+
+/* ----- media queries ------- */
+@media screen and (min-width: 992px) {
+    header {
+        max-width: 70%;
+    }
+    footer {
+        max-width: 70%;
+    }
 }

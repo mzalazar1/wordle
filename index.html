@@ -4,11 +4,10 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Wordle - Un juego de palabras diario</title>
+        <title>Final LPPA</title>
         <script src="app.js"></script>
         <link rel="stylesheet" href="modales.css"> 
         <link rel="stylesheet" href="estilos.css">
-        <link rel="stylesheet" href="styleKey.css">
 
     </head>
     <body>
@@ -17,10 +16,10 @@
             <div class="menuJuego">
                 <p class="center" id="colNom">Ingresá tu nombre</p>
                 <input class="center" type="text" id="nombre">
-                <button class="center" id="jugar">Jugar nueva partida</button>
-                <button class="center" id="partGuard">Ver partidas guardadas</button>
-                <button class="oculto center" id="guardaPart">GUARDAR PARTIDA</button>
-                <h3 class="center oculto" id="cronometro">0:00:00</h3>
+                <button class="center" id="jugar">JUGAR</button>
+                <button class="center" id="partGuard">PARTIDOS GUARDADOS</button>
+                <button class="hidden center" id="guardaPart">GUARDAR PARTIDO</button>
+                <h3 class="center hidden" id="cronometro">0:00:00</h3>
             </div>
            
         </header>
@@ -110,28 +109,25 @@
 
     </div>
 
-
-
-
-        <div id="modalFaltaNombre" class="modal oculto">
+        <div id="modalFaltaNombre" class="modal hidden">
             <div class="modal-content">
                 <span class="close closeNombre">&times;</span>
                 <p class="center-text">Ingrese su nombre</p>
             </div>
         </div>
-        <div id="modalGano" class="modal oculto">
+        <div id="modalGano" class="modal hidden">
             <div class="modal-content gano">
                 <span class="close closeGano">&times;</span>
                 <p class="center-text">Has ganado!!</p>
             </div>
         </div>
-        <div id="modalPerdio" class="modal oculto">
+        <div id="modalPerdio" class="modal hidden">
             <div class="modal-content">
                 <span class="close closePerdio">&times;</span>
                 <p class="center-text">Has perdido!</p>
             </div>
         </div>
-        <div id="modalPartGuard" class="modal oculto">
+        <div id="modalPartGuard" class="modal hidden">
             <div class="modal-content">
                 <span class="close closePartGuard">&times;</span>
                 <table class="center-text">

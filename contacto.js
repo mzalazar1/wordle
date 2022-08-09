@@ -8,7 +8,7 @@ window.onload = function () {
     btnCodigo.addEventListener("click", irACodigo)
     var regOk = 0
 
-   //validacion nombre
+//validacion nombre
 var nombre = document.getElementById('name');
 var nombreError = document.getElementById('nameError');
 
@@ -27,7 +27,6 @@ function validateNombre(e) {
        regOk++;
     }
 }
-
 //validacion mail
 var mail = document.getElementById('mail');
 var mailError = document.getElementById('mailError');
@@ -39,7 +38,6 @@ function clearMailError(e) {
     mailError.classList.add('hiddenError');
 }
 
-
 function validateMail(e) {
     var x = mail.value;
     var emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i ;
@@ -50,9 +48,6 @@ function validateMail(e) {
        regOk++;
     }
 }
-    
-
-
 //valida comentarios
     var comentarios = document.getElementById('mensaje')
     var comentariosError = document.getElementById('comentariosError');
@@ -86,8 +81,8 @@ function validateMail(e) {
     function volver() {
         document.location.href = "index.html"
     }
-
-    function irACodigo () {                    //abre la pagina de github con el codigo
+    //link a Githug
+    function irACodigo () {                    
         window.open("https://github.com/mzalazar1/wordle", "_blank")
     }
 }

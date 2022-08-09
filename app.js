@@ -11,22 +11,17 @@ window.onload = function() {
           ["", "", "", "", ""]
       ]
       var btnLetra = document.getElementsByClassName("letra")     //busca los botones del teclado
-      var numBtns = btnLetra.length
+      var numBtnLet = btnLetra.length
       var letTeclado = "QWERTYUIOPASDFGHJKLÑZXCVBNM"              //para validar letras usadas y pintar el teclado
-
       var partidasGuardadas = [""]                  //levanta las partidas que se encuentren en localstorage
-      var palabra = "DEFEC"                       //palabra a encontrar en el tablero (queda esta en caso de no poder leer el json)
+      var palabra = ""                       //palabra incognita
       var nomJug = ""
       var rowActual = 0                          //determina la fila actual (principalmente en el focus)
       var colActual = 0                           //determina la columna actual (principalmente en el focus)
       var palCorrecta = false                     //determina si la palabra en el renglon es la correcta
       var jugar = false                           //determina si el juego finalizo o no
       var importaDatos = false                    //determina si carga datos desde una partida guardada (se usa para validaciones)
-      var seg = 0                                 //variables de cronometro
-      var min = 0
-      var hs = 0
       var id = 0                                  //id partida
-  
   
       //Traer Elementos
       var enter = document.getElementById("enter")
@@ -40,8 +35,8 @@ window.onload = function() {
       var btnContacto = document.getElementById("btnContactanos")
       var btnCodigo = document.getElementById("btnCodigo")
       var btnReiniciar = document.getElementById("btnReiniciar")
+     
       //eventos
-  
       empJuego.addEventListener("click", startJuego)
       enter.addEventListener("click",validaPalabra)
       borrar.addEventListener("click",borraLetra)
@@ -50,20 +45,18 @@ window.onload = function() {
       guardPart.addEventListener("click",guardaPartida)
       btnCodigo.addEventListener("click",abreCodigo)
       btnContacto.addEventListener("click",abreContacto)
-      btnReiniciar.addEventListener("click",recargaPagina)
-      for (var i = 0; i < numBtns; i++) {
+      btnReiniciar.addEventListener("click",refrescaPagina)
+      for (var i = 0; i < numBtnLet; i++) {
           btnLetra[i].addEventListener('click', focus);  
       }
 
-          //LLamadas inicio
-  
-          desCampos()
+    //LLamadas
+          deshabiCampos()
           buscaPalabra()
           leePartidas()
   
-      //funciones
-  
-      function desCampos() {          //deshabilita todos los campos para que el usuario no los pueda usar
+    //funciones
+      function deshabiCampos() {          //deshabilita todos los campos para que el usuario no los pueda usar
           for (let iFila = 0; iFila < letras.length; iFila++) {
               for (let iCol = 0; iCol < letras[iFila].length; iCol++) {
                   var id = "r"+iFila+"c"+iCol
@@ -72,9 +65,9 @@ window.onload = function() {
               }
           }
       }
-  
-      function buscaPalabra() {       //elige la palabra aleatoria para resolver
-          var sinAcento = /[ÁÉÍÓÚ]/
+      //elige la palabra aleatoria para resolver
+      function buscaPalabra() {       
+          var sinAcento = /[ÁÉÍÓÚ]/  //regex
           var palAnteriores = []
           fetch (link)
           .then(function(respuesta) {
@@ -100,8 +93,8 @@ window.onload = function() {
               }
           })
       }
-  
-      function leePartidas () {       //levanta partidas guardadas en localstorage
+      //levanta partidas guardadas en localstorage
+      function leePartidas () {       
           partidasGuardadas = JSON.parse(localStorage.getItem("PartidasGuardadas"))
           if (partidasGuardadas != null) {
               id = partidasGuardadas.length + 1
@@ -110,24 +103,24 @@ window.onload = function() {
               partidasGuardadas = []
           }            
       }
-  
-      function startJuego () {        //acciones que realiza cuando comienza el juego
+      //acciones que realiza cuando comienza el juego
+      function startJuego () {        
           if ((nombre.value != "" && jugar == false) || importaDatos) {
               jugar = true
-              colNom.classList.add("oculto")
-              nombre.classList.add("oculto")
-              crono.classList.remove("oculto")
-              guardPart.classList.remove("oculto")
-              empJuego.classList.add("oculto")
-              partGuard.classList.add("oculto")
+              colNom.classList.add("hidden")
+              nombre.classList.add("hidden")
+              crono.classList.remove("hidden")
+              guardPart.classList.remove("hidden")
+              empJuego.classList.add("hidden")
+              partGuard.classList.add("hidden")
               nomJug = nombre.value
               cronometro()
           } else {
               opModFalNom()
           }        
       }
-  
-      function focus() {              //detecta que sea una letra lo ingresado y en función de eso corre el focus o renglon
+      //detecta que sea una letra lo ingresado y en función de eso corre el focus o renglon
+      function focus() {              
           if(jugar == true && colActual < 5 && event.keyCode > 64 && event.keyCode < 91 || event.keyCode == 192) {
               var celda = recCeldas(colActual)
               celda.value = event.key.toUpperCase()
@@ -151,8 +144,8 @@ window.onload = function() {
               }
           }
       }
-  
-      function validaPalabra() {      //cuando presiona enter, hace las validaciones de la palabra y si esta completo
+      //cuando presiona enter, hace las validaciones de la palabra y si esta completo
+      function validaPalabra() {      
           if(validaRenglonCompleto()) {
               obtenerPalabra()
               if(rowActual < 5) {
@@ -164,8 +157,8 @@ window.onload = function() {
           }
               
       }
-  
-      function borraLetra () {        //cuando el usuario presiona en la tecla borrar, borra la letra del tablero
+      //cuando el usuario presiona en la tecla borrar, borra la letra del tablero
+      function borraLetra () {        
           if(colActual > 0) {
               colActual--
           }
@@ -173,8 +166,8 @@ window.onload = function() {
           var celda = document.getElementById(celdaActual)
           celda.value = ""
       }
-  
-      function validaRenglonCompleto() {          //valida que el renglón este completo
+      //valida que el renglón este completo
+      function validaRenglonCompleto() {          
           var filaCompleta = true
           for (let colCelda = 0; colCelda < 5; colCelda++) {
               var celda = recCeldas(colCelda)
@@ -182,12 +175,12 @@ window.onload = function() {
                   filaCompleta = filaCompleta * true
               } else {
                   filaCompleta = filaCompleta * false
-     0         }
+              }
           }
           return filaCompleta
       }
-  
-      function obtenerPalabra() {                 //procesa la palabra con las validaciones, obtiene la palabra y la pinta
+     //procesa la palabra con las validaciones, obtiene la palabra y la pinta
+      function obtenerPalabra() {                 
           var newPalabra = palabra
           palCorrecta = true
           //revisa los verdes
@@ -223,14 +216,14 @@ window.onload = function() {
               pierdeJuego()
           }
       }
-  
-      function recCeldas (idCel) {                //recorre las celdas y devuelve el valor rXcX
+      //recorre las celdas y devuelve el valor 
+      function recCeldas (idCel) {                
           var celda = "r" + rowActual + "c" + idCel
           var iCelda = document.getElementById(celda)
           return iCelda
       }
-  
-      function pintaTeclado (celda, color) {      //pinta el teclado con los colores que determine la funcion obtenerPalabra
+      //pinta el teclado con los colores que determine la funcion obtenerPalabra
+      function pintaTeclado (celda, color) {      
           if (letTeclado.match(celda.value)) {
               letTeclado = letTeclado.replace(celda.value, "*")
               var idBtnLet = "let" + celda.value
@@ -238,16 +231,20 @@ window.onload = function() {
               btnLet.classList.add(color)
           }
       }
-  
-      function ganaJuego () {                     //se dispara cuando se gana el juego
+      //se dispara cuando se gana el juego
+      function ganaJuego () {                     
           opModGano()
       }
-  
-      function pierdeJuego () {                   //se dispara cuando se pierde el juego
+      //se dispara cuando se pierde el juego
+      function pierdeJuego () {                   
           opModPerdio()
       }
   
-      function cronometro () {                    //administra el cronometro
+      //Cronometro
+      var seg = 0                                 //variables
+      var min = 0
+      var hs = 0
+      function cronometro () {                    
           var tiempo = "00:00:00"
           let mensaje = new Promise((resolve, reject)=>{
               setTimeout(function () {
@@ -282,8 +279,8 @@ window.onload = function() {
               console.log('error');
           })
       }
-  
-      function guardaPartida () {                 //guarda la partida en curso
+      //guarda la partida en curso
+      function guardaPartida () {                 
           var datosPartidaAct = []
           var fecha = new Date().toLocaleDateString()
           var hora = new Date().toLocaleTimeString();
@@ -302,8 +299,8 @@ window.onload = function() {
           console.log(partidasGuardadas)
           localStorage.setItem("PartidasGuardadas", JSON.stringify(partidasGuardadas))
       }
-  
-      function cargaPartida () {                  //muestra las partidas guardadas en el modal
+      //muestra las partidas guardadas en el modal
+      function cargaPartida () {                  
           opModPartGuard()
           if (partidasGuardadas.length > 0) {
               partidasGuardadas.forEach(dato => {
@@ -334,8 +331,8 @@ window.onload = function() {
               })
           }
       }
-  
-      function cargaPartidaTablero () {           //carga los datos en el tablero y la matriz de letras
+      //carga los datos en el tablero y la matriz de letras
+      function cargaPartidaTablero () {           
           var registro = partidasGuardadas[this.value - 1]
           var letrasPartida = registro[5]
           id = registro[0]
@@ -347,7 +344,7 @@ window.onload = function() {
           jugar = true
           importaDatos = true
           modalPartGuard.classList.remove("block")
-          modalPartGuard.classList.add("oculto")
+          modalPartGuard.classList.add("hidden")
           rowActual = 0
           for (let iiFila = 0; iiFila < 6; iiFila++) {
               for (let iiCol = 0; iiCol < 5; iiCol++) {
@@ -361,22 +358,22 @@ window.onload = function() {
           nomJug = registro[1]
           importaDatos = false
       }
-  
-      function abreCodigo () {                    //abre la pagina de github con el codigo
+      //link a Github
+      function abreCodigo () {                    
           window.open("https://github.com/mzalazar1/wordle", "_blank")
       }
-  
-      function abreContacto () {                  //abre la pagina con el contacto
+      //link a contacto
+      function abreContacto () {                  
           document.location.href = "contacto.html"
       }
-  
-      function recargaPagina () {                 //recarga la pagina
+      //refresca pagina
+      function refrescaPagina () {                 
           location.reload()
       }
   
       // ---------- modales ---------- //
   
-      //DOM
+      // variables DOM
       var modalGano = document.getElementById("modalGano")
       var modalPerdio = document.getElementById("modalPerdio")
       var modalNombre = document.getElementById("modalFaltaNombre")
@@ -389,54 +386,55 @@ window.onload = function() {
       //cierra modales
       closeGano.onclick = function() {
           modalGano.classList.remove("block")
-          modalGano.classList.add("oculto")
+          modalGano.classList.add("hidden")
       }
       closePerdio.onclick = function() {
           modalPerdio.classList.remove("block")
-          modalPerdio.classList.add("oculto")
+          modalPerdio.classList.add("hidden")
       }
       closeNombre.onclick = function() {
           modalNombre.classList.remove("block")
-          modalNombre.classList.add("oculto")
+          modalNombre.classList.add("hidden")
       }
       closePartGuard.onclick = function() {
           modalPartGuard.classList.remove("block")
-          modalPartGuard.classList.add("oculto")
+          modalPartGuard.classList.add("hidden")
       }
+
       window.onclick = function(event) {
           if (event.target == modalGano) {
               modalGano.classList.remove("block")
-              modalGano.classList.add("oculto")
+              modalGano.classList.add("hidden")
           }
           if (event.target == modalPerdio) {
               modalPerdio.classList.remove("block")
-              modalPerdio.classList.add("oculto")
+              modalPerdio.classList.add("hidden")
           }
           if (event.target == modalNombre) {
               modalNombre.classList.remove("block")
-              modalNombre.classList.add("oculto")
+              modalNombre.classList.add("hidden")
           }
           if (event.target == modalPartGuard) {
               modalPartGuard.classList.remove("block")
-              modalPartGuard.classList.add("oculto")
+              modalPartGuard.classList.add("hidden")
           }
       }
   
-      //abre modales
+      //abre modales de la partida
       function opModGano () {
-          modalGano.classList.remove("oculto")
+          modalGano.classList.remove("hidden")
           modalGano.classList.add("block")
       }
       function opModPerdio () {
-          modalPerdio.classList.remove("oculto")
+          modalPerdio.classList.remove("hidden")
           modalPerdio.classList.add("block")
       }
       function opModFalNom () {
-          modalNombre.classList.remove("oculto")
+          modalNombre.classList.remove("hidden")
           modalNombre.classList.add("block")
       }
       function opModPartGuard () {
-          modalPartGuard.classList.remove("oculto")
+          modalPartGuard.classList.remove("hidden")
           modalPartGuard.classList.add("block")
       }
 
