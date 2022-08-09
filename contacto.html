@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="estilos.css">
+        <link rel="stylesheet" href="estiloContact.css">
+        <script src="contacto.js"></script>
+        <title>Contacto</title>
+    </head>
+    <body>
+        <header>
+            <h1>Contacto</h1>
+        </header>
+        <main>
+            <form>
+                <h2 class="titulo">Formulario de registro</h2>
+                <label for="nombre">Nombre: </label>
+                <input type="text" id="name" placeholder="Ingresar nombre">
+                <p class="hiddenError" id="nameError">Debe contener al menos 3 caracteres</p>
+                <label for="email">Email: </label>
+                <input type="text" id="mail" placeholder="Ingresar email">
+                <p class="hiddenError" id="mailError">Ingrese un mail correcto</p>
+                <p>Comentarios:</p>
+                <textarea name="mensaje" id="mensaje" placeholder="Ingrese su mensaje"></textarea>
+                <p class="hiddenError" id="comentariosError">Debe ingresar al menos 5 caracteres</p>
+                <input type="button" value="Enviar" id="btnEnviar">
+            </form>
+        </main>
+        <footer>
+            <button id="btnVolver">Volver</button>
+            <button id="btnCodigo">Código del juego</button>
+        </footer>
+    </body>
+</html>

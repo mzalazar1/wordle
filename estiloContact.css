@@ -1,0 +1,49 @@
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin: 0 auto;
+    font-size: 18px;
+}
+button {
+    margin-top: 15px;
+}
+label {
+    margin-top: 10px;
+}
+input[type=button] {
+    margin-top: 20px;
+}
+p {
+    margin: 5px 0;
+}
+.error {
+    color: red;
+}
+.rad-red {
+    border-color: red;
+}
+.rad-black {
+    border-color: black;
+}
+
+.hiddenError{
+    display: none;
+}
+
+#nameError {
+    font-size: 1rem;
+    color: red;
+    margin: 0;
+}
+#mailError {
+    font-size: 1rem;
+    color: red;
+    margin: 0;
+}
+#comentariosError {
+    font-size: 1rem;
+    color: red;
+    margin: 0;
+}
