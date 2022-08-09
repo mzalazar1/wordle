@@ -15,4 +15,6 @@ Se presenta el proyecto para rendir el final, el cual consta de:
 _ dos archivos .html (index y contacto)
 _ dos archivos .js (app y contacto)
 _ tres archivos .css (estilos, modales y estiloContac)
-_ un readme
+_ un readme .txt
+
+Link Page:  https://mzalazar1.github.io/wordle/
